@@ -1,0 +1,129 @@
+﻿<Window
+    x:Class="GraphicsEditor.Views.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:GraphicsEditor.ViewModels"
+    Title="Graphics editor - Bartosz Kopec 2020-04-10"
+    Width="620"
+    Height="480"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <StackPanel
+            Height="25"
+            Margin="20,10,20,10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Margin="0,0,20,0"
+                Click="SelectImage"
+                Content="Pick the image"
+                IsEnabled="{Binding IsUserInterfaceEnabled}" />
+            <Button
+                Width="100"
+                Margin="0,0,20,0"
+                Click="CancelOperationClick"
+                Content="Cancel operation" />
+            <Button
+                Width="100"
+                Margin="0,0,20,0"
+                Click="GrayscaleButtonClicked"
+                Content="Grayscale"
+                IsEnabled="{Binding IsUserInterfaceEnabled}" />
+
+            <Button
+                Width="100"
+                Margin="0,0,20,0"
+                Click="NegativeButtonClicked"
+                Content="Negative"
+                IsEnabled="{Binding IsUserInterfaceEnabled}" />
+
+        </StackPanel>
+
+        <StackPanel
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Orientation="Horizontal">
+            <Border
+                Margin="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderBrush="Black"
+                BorderThickness="1">
+                <Image
+                    Width="500"
+                    Height="300"
+                    Source="{Binding Source}" />
+            </Border>
+            <StackPanel Width="100">
+                <Label
+                    HorizontalAlignment="Stretch"
+                    Content="{Binding RValueText}"
+                    ContentStringFormat="Red: {0}" />
+                <Slider
+                    HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding IsUserInterfaceEnabled}"
+                    Maximum="100"
+                    Value="{Binding RValue}" />
+                <Label
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Stretch"
+                    Content="{Binding GValueText}"
+                    ContentStringFormat="Green: {0}" />
+                <Slider
+                    IsEnabled="{Binding IsUserInterfaceEnabled}"
+                    Maximum="100"
+                    RenderTransformOrigin="0.51,0.507"
+                    Value="{Binding GValue}" />
+                <Label
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Stretch"
+                    Content="{Binding BValueText}"
+                    ContentStringFormat="Blue: {0}" />
+                <Slider
+                    HorizontalAlignment="Stretch"
+                    IsEnabled="{Binding IsUserInterfaceEnabled}"
+                    Maximum="100"
+                    Value="{Binding BValue}" />
+                <Button
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Stretch"
+                    Click="ChangeColorsClick"
+                    Content="Change"
+                    IsEnabled="{Binding IsUserInterfaceEnabled}" />
+            </StackPanel>
+        </StackPanel>
+
+        <Grid
+            Height="50"
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="21" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Content="{Binding OperationElapsedTimeParallel}"
+                ContentStringFormat="Operation time with parallel: {0}ms" />
+            <Rectangle
+                Grid.Column="1"
+                Margin="10,0,10,0"
+                Stroke="Black" />
+            <Label
+                Grid.Column="2"
+                Content="{Binding OperationElapsedTime}"
+                ContentStringFormat="Operation time with linear for loops: {0}ms" />
+        </Grid>
+    </StackPanel>
+</Window>
