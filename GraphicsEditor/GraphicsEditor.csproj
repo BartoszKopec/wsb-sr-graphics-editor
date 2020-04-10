@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Authors>Bartosz Kopeć</Authors>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
